@@ -6,6 +6,7 @@ import com.example.taskcrudhibernate.service.SpecialtyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class SpecialityController {
     }
 
     @PostMapping
-    public ResponseEntity<?> saveSpeciality(@RequestBody SimpleSpecialtyDto specialtyDto) {
+    public ResponseEntity<?> saveSpeciality(@Validated @RequestBody SimpleSpecialtyDto specialtyDto) {
         specialtyService.saveSpecialty(specialtyDto);
         return ResponseEntity.status(HttpStatus.CREATED).body("Specialty is created");
     }
@@ -44,7 +45,7 @@ public class SpecialityController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<?> updateSpecialty(@PathVariable(value = "id") Long id,
-                                             @RequestBody SimpleSpecialtyDto specialtyDto) {
+                                             @Validated @RequestBody SimpleSpecialtyDto specialtyDto) {
         specialtyService.updateSpecialty(id, specialtyDto);
         return ResponseEntity.ok("Specialty is updated");
     }

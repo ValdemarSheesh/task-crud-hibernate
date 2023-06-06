@@ -6,6 +6,7 @@ import com.example.taskcrudhibernate.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public ResponseEntity<?> saveEmployee(@RequestBody SimpleEmployeeDto employeeDto) {
+    public ResponseEntity<?> saveEmployee(@Validated @RequestBody SimpleEmployeeDto employeeDto) {
         employeeService.saveEmployee(employeeDto);
         return ResponseEntity.status(HttpStatus.CREATED).body("Employee is created");
     }
@@ -51,7 +52,7 @@ public class EmployeeController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<?> updateEmployee(@PathVariable Long id,
-                                            @RequestBody SimpleEmployeeDto employeeDto) {
+                                            @Validated @RequestBody SimpleEmployeeDto employeeDto) {
         employeeService.updateEmployee(id, employeeDto);
         return ResponseEntity.ok("Employee is updated");
     }

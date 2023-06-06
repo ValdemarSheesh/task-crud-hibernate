@@ -6,6 +6,7 @@ import com.example.taskcrudhibernate.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class ProjectController {
     }
 
     @PostMapping
-    public ResponseEntity<?> saveProject(@RequestBody SimpleProjectDto projectDto) {
+    public ResponseEntity<?> saveProject(@Validated @RequestBody SimpleProjectDto projectDto) {
         projectService.saveProject(projectDto);
         return ResponseEntity.status(HttpStatus.CREATED).body("Project is created");
     }
@@ -50,7 +51,7 @@ public class ProjectController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<?> updateProject(@PathVariable Long id,
-                                           @RequestBody SimpleProjectDto projectDto) {
+                                           @Validated @RequestBody SimpleProjectDto projectDto) {
         projectService.updateProject(id, projectDto);
         return ResponseEntity.ok("Project is updated");
     }

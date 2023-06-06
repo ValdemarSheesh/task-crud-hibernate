@@ -2,6 +2,7 @@ package com.example.taskcrudhibernate.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -12,5 +13,11 @@ public class GlobalExceptionHandler {
     public ResponseEntity<AppError> catchNotFoundException(NotFoundException e) {
         e.printStackTrace();
         return new ResponseEntity<>(new AppError(HttpStatus.NOT_FOUND.value(), e.getMessage()), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<AppError> methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
+        e.printStackTrace();
+        return new ResponseEntity<>(new AppError(HttpStatus.NOT_FOUND.value(), e.getMessage()), HttpStatus.BAD_REQUEST);
     }
 }

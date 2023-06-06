@@ -1,8 +1,11 @@
 package com.example.taskcrudhibernate.dto.simpleDto;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class SimpleProjectDto {
 
     private Long id;
+    @NotBlank
     private String name;
 
     public SimpleProjectDto(Long id, String name) {
