@@ -56,9 +56,7 @@ public class ProjectServiceImpl implements ProjectService {
     public void assignProjectToEmployee(Long projectId, Long employeeId) {
         Project project = projectRepo.findById(projectId);
         Employee employee = employeeRepo.findById(employeeId);
-        ;
         if (project == null) throw new NotFoundException("Project with id " + projectId + " is not exist");
-        ;
         if (employee == null) throw new NotFoundException("Employee with id " + employeeId + " is not exist");
         project.getEmployees().add(employee);
     }
@@ -75,6 +73,16 @@ public class ProjectServiceImpl implements ProjectService {
     @Transactional
     public boolean deleteProjectById(Long id) {
         return projectRepo.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteEmployeeFromProject(Long projectId, Long employeeId) {
+        Project project = projectRepo.findById(projectId);
+        Employee employee = employeeRepo.findById(employeeId);
+        if (project == null) throw new NotFoundException("Project with id " + projectId + " is not exist");
+        if (employee == null) throw new NotFoundException("Employee with id " + employeeId + " is not exist");
+        project.getEmployees().remove(employee);
     }
 
     private ProjectDto mapProjectToProjectDto(Project project) {

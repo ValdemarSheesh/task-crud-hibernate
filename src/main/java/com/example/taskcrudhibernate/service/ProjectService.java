@@ -18,4 +18,6 @@ public interface ProjectService {
     void updateProject(Long id, SimpleProjectDto projectDto);
 
     boolean deleteProjectById(Long id);
+
+    void deleteEmployeeFromProject(Long projectId, Long employeeId);
 }

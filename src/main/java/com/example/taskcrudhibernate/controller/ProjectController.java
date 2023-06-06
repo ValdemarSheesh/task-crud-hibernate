@@ -56,6 +56,13 @@ public class ProjectController {
         return ResponseEntity.ok("Project is updated");
     }
 
+    @DeleteMapping("/employee/{projectId}")
+    public ResponseEntity<?> deleteEmployeeFromProject(@PathVariable Long projectId,
+                                                       @RequestParam(value = "employee_id") Long employeeId) {
+        projectService.deleteEmployeeFromProject(projectId, employeeId);
+        return ResponseEntity.ok("Employee deleted from project");
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteProject(@PathVariable Long id) {
         return ResponseEntity.ok(projectService.deleteProjectById(id));
