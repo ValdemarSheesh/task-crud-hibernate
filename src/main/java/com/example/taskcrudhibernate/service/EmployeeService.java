@@ -18,4 +18,6 @@ public interface EmployeeService {
     void updateEmployee(Long id, SimpleEmployeeDto employeeDto);
 
     boolean deleteEmployeeById(Long id);
+
+    void deleteSpecialtyInEmployee(Long id);
 }

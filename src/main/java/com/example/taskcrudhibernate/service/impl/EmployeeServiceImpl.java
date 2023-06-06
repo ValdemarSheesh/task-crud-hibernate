@@ -76,6 +76,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepo.deleteById(id);
     }
 
+    @Override
+    @Transactional
+    public void deleteSpecialtyInEmployee(Long id) {
+        Employee employee = employeeRepo.findById(id);
+        if (employee == null) throw new NotFoundException("Employee with id " + id + " is not exist");
+        employee.setSpecialty(null);
+    }
+
     private EmployeeDto mapEmployeeToEmployeeDto(Employee employee) {
         EmployeeDto employeeDto = EmployeeDto.EmployeeDtoBuilder
                 .anEmployeeDto()
