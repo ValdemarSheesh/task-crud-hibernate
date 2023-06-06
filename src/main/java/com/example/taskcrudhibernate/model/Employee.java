@@ -8,31 +8,34 @@ import java.util.List;
 
 @Entity(name = "employees")
 public class Employee {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
 
     private String name;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.SET_NULL)
-    @ManyToOne()
     @JoinColumn(name = "specialty_id")
     private Specialty specialty;
+
+    @ManyToMany(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.SET_NULL)
-    @ManyToMany()
     @JoinTable(name = "employee_project",
             joinColumns = @JoinColumn(name = "employee_id"),
             inverseJoinColumns = @JoinColumn(name = "project_id"))
     private List<Project> projects;
-
-    public Employee() {
-    }
 
     public Employee(Long id, String name, Specialty specialty, List<Project> projects) {
         this.id = id;
         this.name = name;
         this.specialty = specialty;
         this.projects = projects;
+    }
+
+    public Employee() {
     }
 
     public Long getId() {

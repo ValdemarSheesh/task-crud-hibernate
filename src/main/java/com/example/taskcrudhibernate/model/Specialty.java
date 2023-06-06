@@ -8,15 +8,17 @@ import java.util.List;
 
 @Entity(name = "specialties")
 public class Specialty {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
+
     private Long id;
 
     private String nameSpecialty;
 
+    @OneToMany(mappedBy = "specialty", fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.SET_NULL)
-    @OneToMany(mappedBy = "specialty")
     private List<Employee> employees;
 
     public Specialty(Long id, String nameSpecialty, List<Employee> employees) {
