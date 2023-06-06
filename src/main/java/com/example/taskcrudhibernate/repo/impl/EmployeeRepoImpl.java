@@ -22,7 +22,7 @@ public class EmployeeRepoImpl implements EmployeeRepo {
     @Override
     public void save(Employee employee) {
         Session session = sessionFactory.getCurrentSession();
-        session.save(employee);
+        session.persist(employee);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class EmployeeRepoImpl implements EmployeeRepo {
         Session session = sessionFactory.getCurrentSession();
         Employee employee = session.get(Employee.class, id);
         if (employee != null) {
-            session.delete(employee);
+            session.remove(employee);
             return true;
         } else return false;
     }

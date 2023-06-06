@@ -22,7 +22,7 @@ public class SpecialtyRepoImpl implements SpecialtyRepo {
     @Override
     public void save(Specialty specialty) {
         Session session = sessionFactory.getCurrentSession();
-        session.save(specialty);
+        session.persist(specialty);
     }
 
     @Override

@@ -22,7 +22,7 @@ public class ProjectRepoImpl implements ProjectRepo {
     @Override
     public void save(Project project) {
         Session session = sessionFactory.getCurrentSession();
-        session.save(project);
+        session.persist(project);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class ProjectRepoImpl implements ProjectRepo {
         Session session = sessionFactory.getCurrentSession();
         Project project = session.get(Project.class, id);
         if (project != null) {
-            session.delete(project);
+            session.remove(project);
             return true;
         } else return false;
     }
